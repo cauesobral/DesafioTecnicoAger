@@ -33,6 +33,31 @@ public class FuncionarioBusiness {
 		
 	}	
 	
+	public void alterarFuncionario(FuncionarioVo funcionario) {
+		try {
+			//Lembrar que eu tenho q adicionar mais validações dps
+			if (funcionario.getNome() == null || funcionario.getNome().isEmpty()) {
+				throw new IllegalArgumentException("O nome digitado não pode ser vazio.");
+			}
+			if (funcionario.getRowid() == null || funcionario.getRowid().isEmpty()) {
+				throw new IllegalArgumentException ("Código do funcionário deve ser informado.");
+			}
+			dao.updateFuncionario(funcionario);
+		} catch (Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a alteração do registro.");
+		}
+	}
+	
+	public void excluirFuncionario(String codigo) {
+	    try {
+	        Integer codigoNumero = Integer.parseInt(codigo);
+	        dao.deleteFuncionario(codigoNumero);
+
+	    } catch (NumberFormatException e) {
+	        throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
+	    }
+	}
+	
 	public List<FuncionarioVo> filtrarFuncionarios(FuncionarioFilter filter){
 		List<FuncionarioVo> funcionarios = new ArrayList<>();
 		
