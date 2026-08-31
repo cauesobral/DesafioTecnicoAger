@@ -33,12 +33,27 @@ public class FuncionarioAction extends Action {
 	}
 	
 	public String novo() {
-		if(funcionarioVo.getNome() == null)
-			return INPUT;
-		
-		business.salvarFuncionario(funcionarioVo);
-		
-		return REDIRECT;
+	    if (funcionarioVo.getNome() == null || funcionarioVo.getNome().isEmpty()) {
+	        return INPUT;
+	    }
+
+	    if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty()) {
+	        business.salvarFuncionario(funcionarioVo);
+	    } else {
+	        business.alterarFuncionario(funcionarioVo);
+	    }
+
+	    return REDIRECT;
+	}
+	
+	public String excluir() {
+	    if (funcionarioVo.getRowid() == null || funcionarioVo.getRowid().isEmpty()) {
+	        return REDIRECT;
+	    }
+
+	    business.excluirFuncionario(funcionarioVo.getRowid());
+
+	    return REDIRECT;
 	}
 	
 	public String editar() {
