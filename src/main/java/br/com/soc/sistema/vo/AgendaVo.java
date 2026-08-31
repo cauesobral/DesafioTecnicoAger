@@ -29,6 +29,14 @@ public class AgendaVo {
 		this.nome = nome;
 	}
 	
+	public Periodo getPeriodo() {
+		return periodo;
+	}
+	
+	public void setPeriodo(Periodo periodo) {
+		this.periodo = periodo;
+	}
+	
 	@Override
 	public String toString() {
 		return "AgendaVo [rowid=" + rowid + ", nome=" + nome + ", periodo=" + periodo+ "]";
