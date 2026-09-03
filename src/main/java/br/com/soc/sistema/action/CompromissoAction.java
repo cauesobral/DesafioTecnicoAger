@@ -1,5 +1,101 @@
 package br.com.soc.sistema.action;
 
-public class CompromissoAction {
+import java.util.ArrayList;
+import java.util.List;
 
+import br.com.soc.sistema.business.CompromissoBusiness;
+import br.com.soc.sistema.infra.Action;
+import br.com.soc.sistema.vo.CompromissoVo;
+
+public class CompromissoAction extends Action {
+
+    private List<CompromissoVo> compromissos = new ArrayList<>();
+
+    private CompromissoBusiness business = new CompromissoBusiness();
+
+    private CompromissoVo compromissoVo = new CompromissoVo();
+
+    public String todos() {
+        compromissos = business.trazerTodosOsCompromissos();
+
+        return SUCCESS;
+    }
+
+    public String novo() {
+
+        if (compromissoVo.getFuncionario() == null
+                || compromissoVo.getFuncionario().getRowid() == null
+                || compromissoVo.getFuncionario().getRowid().isEmpty()) {
+
+            return INPUT;
+        }
+
+        if (compromissoVo.getAgenda() == null
+                || compromissoVo.getAgenda().getRowid() == null
+                || compromissoVo.getAgenda().getRowid().isEmpty()) {
+
+            return INPUT;
+        }
+
+        if (compromissoVo.getDataCompromisso() == null
+                || compromissoVo.getHorarioCompromisso() == null) {
+
+            return INPUT;
+        }
+
+        if (compromissoVo.getRowid() == null
+                || compromissoVo.getRowid().isEmpty()) {
+
+            business.salvarCompromisso(compromissoVo);
+
+        } else {
+
+            business.alterarCompromisso(compromissoVo);
+        }
+
+        return REDIRECT;
+    }
+
+    public String editar() {
+
+        if (compromissoVo.getRowid() == null
+                || compromissoVo.getRowid().isEmpty()) {
+
+            return REDIRECT;
+        }
+
+        compromissoVo =
+                business.buscarCompromissoPor(compromissoVo.getRowid());
+
+        return INPUT;
+    }
+
+    public String excluir() {
+
+        if (compromissoVo.getRowid() == null
+                || compromissoVo.getRowid().isEmpty()) {
+
+            return REDIRECT;
+        }
+
+        business.excluirCompromisso(compromissoVo.getRowid());
+
+        return REDIRECT;
+    }
+
+    public List<CompromissoVo> getCompromissos() {
+        return compromissos;
+    }
+
+    public void setCompromissos(List<CompromissoVo> compromissos) {
+        this.compromissos = compromissos;
+    }
+
+    public CompromissoVo getCompromissoVo() {
+        return compromissoVo;
+    }
+
+    public void setCompromissoVo(CompromissoVo compromissoVo) {
+        this.compromissoVo = compromissoVo;
+    }
 }
