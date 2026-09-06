@@ -20,6 +20,11 @@ public class AgendaAction extends Action {
 	}
 
 	public String filtrar() {
+		if (agendaVo.getNome() == null || agendaVo.getNome().trim().isEmpty()) {
+			agendas.addAll(business.trazerTodasAsAgendas());
+		} else {
+			agendas.addAll(business.filtrarAgendasPorNome(agendaVo.getNome()));
+		}
 		return SUCCESS;
 	}
 
@@ -38,12 +43,9 @@ public class AgendaAction extends Action {
 	}
 
 	public String editar() {
-		if (agendaVo.getRowid() == null || agendaVo.getRowid().isEmpty()) {
-			return REDIRECT;
+		if (agendaVo.getRowid() != null && !agendaVo.getRowid().isEmpty()) {
+			agendaVo = business.buscarAgendaPor(agendaVo.getRowid());
 		}
-
-		agendaVo = business.buscarAgendaPor(agendaVo.getRowid());
-
 		return INPUT;
 	}
 

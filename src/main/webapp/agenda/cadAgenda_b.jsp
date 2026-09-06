@@ -4,27 +4,103 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title><s:text name="label.titulo.pagina.consulta.agenda"/></title>
+		<s:url value="/imagens/soc_aba_logo.png" var="faviconUrl"/>
+		<link rel="icon" href="${faviconUrl}" type="image/png">
+		<title>Desafio Técnico</title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
+
+		<style>
+			body {
+				background: #f4f6f7;
+			}
+
+			.filtro-bar {
+				background: #ffffff;
+				border-radius: 8px;
+				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+				padding: 0.4rem;
+			}
+
+			.filtro-bar .input-group-text {
+				background: #ffffff;
+				border: none;
+				color: #1b9aa0;
+				font-weight: 700;
+			}
+
+			.filtro-bar .form-control {
+				border: 1px solid #e1e5e8;
+			}
+
+			.btn-teal {
+				background-color: #1b9aa0;
+				border-color: #1b9aa0;
+				color: #fff;
+			}
+
+			.btn-teal:hover {
+				background-color: #157a80;
+				border-color: #157a80;
+				color: #fff;
+			}
+
+			.btn-gold {
+				background-color: #f2b705;
+				border-color: #f2b705;
+				color: #3a3a3a;
+			}
+
+			.btn-gold:hover {
+				background-color: #d9a400;
+				border-color: #d9a400;
+				color: #3a3a3a;
+			}
+
+			.tabela-agendas {
+				background: #ffffff;
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+			}
+
+			.tabela-agendas thead {
+				background: #1b9aa0;
+			}
+
+			.tabela-agendas thead th {
+				color: #ffffff;
+				border-bottom: 3px solid #f2b705;
+			}
+
+			.tabela-agendas tbody tr:hover {
+				background-color: #eef7f7;
+			}
+
+			.tabela-agendas tfoot {
+				background: #ffffff;
+			}
+		</style>
 	</head>
-	<body class="bg-secondary">	
+	<body>
+		<jsp:include page="/layout/header.jsp"/>
+
 		<div class="container">
-			<div class="row mt-5 mb-2">
+			<div class="row mt-5 mb-3">
 				<div class="col-sm p-0">
 					<s:form action="/filtrarAgendas.action">
-						<div class="input-group">
+						<div class="input-group filtro-bar">
 							<span class="input-group-text">
-								<strong><s:text name="label.nome"/></strong>
+								<s:text name="label.nome"/>
 							</span>	
 								<s:textfield cssClass="form-control" id="nome" name="agendaVo.nome"/>
-								<button class="btn btn-primary" type="submit"><s:text name="label.pesquisar"/></button>
+								<button class="btn btn-teal" type="submit"><s:text name="label.pesquisar"/></button>
 						</div>
 					</s:form>			
 				</div>				
 			</div>
 
 			<div class="row">
-				<table class="table table-light table-striped align-middle">
+				<table class="table table-striped align-middle tabela-agendas mb-0">
 					<thead>
 						<tr>
 							<th><s:text name="label.id"/></th>
@@ -45,7 +121,7 @@
 										<s:param name="agendaVo.rowid" value="rowid"></s:param>
 									</s:url>
 
-									<a href="${editar}" class="btn btn-warning text-white">
+									<a href="${editar}" class="btn btn-gold">
 										<s:text name="label.editar"/>
 									</a>
 									
@@ -65,18 +141,22 @@
 						</s:iterator>
 					</tbody>
 					
-					<tfoot class="table-secondary">
+					<tfoot>
 						<tr>
-							<td colspan="4">
+							<td colspan="4" class="p-3">
 								<s:url action="editarAgendas" var="novo"/>
 								
-								<a href="${novo}" class="btn btn-success">
+								<a href="${novo}" class="btn btn-teal">
 									<s:text name="label.novo"/>
 								</a>
 							</td>
 						</tr>
 					</tfoot>				
 				</table>
+			</div>
+
+			<div class="row mb-5">
+			
 			</div>
 		</div>
 		
@@ -100,7 +180,7 @@
 					<s:text name="label.nao"/>
 				</a>
 	        	
-				<a id="excluir" class="btn btn-primary" style="width: 75px;">
+				<a id="excluir" class="btn btn-teal" style="width: 75px;">
 				    <s:text name="label.sim"/>
 				</a>
 		      </div>

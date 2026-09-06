@@ -28,4 +28,12 @@ public class FuncionarioVo {
 	public String toString() {
 		return "FuncionarioVo [rowid=" + rowid + ", nome=" + nome + "]";
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		FuncionarioVo that = (FuncionarioVo) o;
+		return rowid != null && rowid.equals(that.rowid);
+	}
 }

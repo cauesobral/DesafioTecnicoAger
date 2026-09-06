@@ -35,9 +35,7 @@ public class AgendaDao extends Dao {
 	}
 
 	public List<AgendaVo> findAllAgendas() {
-		StringBuilder query = new StringBuilder(
-				"SELECT rowid id, nm_agenda nome, periodo_disponivel periodo "
-				+ "FROM agenda");
+		StringBuilder query = new StringBuilder("SELECT id, nm_agenda nome, periodo_disponivel periodo FROM agenda");
 
 		try (
 				Connection connection = getConexao();
@@ -66,8 +64,8 @@ public class AgendaDao extends Dao {
 
 	public AgendaVo findByCodigo(Integer codigo) {
 		StringBuilder query = new StringBuilder(
-				"SELECT rowid id, nm_agenda nome, periodo_disponivel periodo "
-				+ "FROM agenda WHERE rowid = ?");
+				"SELECT id, nm_agenda nome, periodo_disponivel periodo "
+				+ "FROM agenda WHERE id = ?");
 
 		try (
 				Connection connection = getConexao();
@@ -98,7 +96,7 @@ public class AgendaDao extends Dao {
 
 	public List<AgendaVo> findAllByNome(String nome) {
 		StringBuilder query = new StringBuilder(
-				"SELECT rowid id, nm_agenda nome, periodo_disponivel periodo "
+				"SELECT id, nm_agenda nome, periodo_disponivel periodo "
 				+ "FROM agenda "
 				+ "WHERE lower(nm_agenda) like lower(?)");
 
@@ -134,7 +132,7 @@ public class AgendaDao extends Dao {
 	public void updateAgenda(AgendaVo agendaVo) {
 		StringBuilder query = new StringBuilder(
 				"UPDATE agenda SET nm_agenda = ?, periodo_disponivel = ? "
-				+ "WHERE rowid = ?");
+				+ "WHERE id = ?");
 
 		try (
 				Connection connection = getConexao();
@@ -155,7 +153,7 @@ public class AgendaDao extends Dao {
 
 	public void deleteAgenda(Integer codigo) {
 		StringBuilder query = new StringBuilder(
-				"DELETE FROM agenda WHERE rowid = ?");
+				"DELETE FROM agenda WHERE id = ?");
 
 		try (
 				Connection connection = getConexao();
