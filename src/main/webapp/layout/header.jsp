@@ -3,7 +3,7 @@
 
 <style>
 	.soc-header {
-		background: linear-gradient(to right, #f7f9fa 0%, #ffffff 60%);
+		background: #ffffff;
 		position: relative;
 		overflow: hidden;
 		border-bottom: 3px solid transparent;
@@ -21,7 +21,7 @@
 	}
 
 	.soc-header .logo img {
-		height: 38px;
+		height: 48px;
 	}
 
 	.soc-header .nav-links {

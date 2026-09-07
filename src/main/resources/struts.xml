@@ -14,8 +14,8 @@
 <package name="br.com.soc.sistema" extends="struts-default" strict-method-invocation="false">
 
 	<global-results>
-	    <result name="erro">/erro.jsp</result>
-	    <result name="erroTecnico">/erroTecnico.jsp</result>
+	    <result name="erro">erro/erro.jsp</result>
+	    <result name="erroTecnico">erro/erroTecnico.jsp</result>
 	</global-results>
 	
 	<global-exception-mappings>

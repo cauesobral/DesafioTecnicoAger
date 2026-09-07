@@ -84,7 +84,7 @@
 	</head>
 	<body>
 		<jsp:include page="/layout/header.jsp"/>
-
+		
 		<div class="container">
 			<div class="row mt-5 mb-3">
 				<div class="col-sm p-0">
@@ -212,5 +212,6 @@
 		        });
 		    });
 		</script>
+		<jsp:include page="/layout/footer.jsp"/>
 	</body>
 </html>
