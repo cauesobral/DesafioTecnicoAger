@@ -10,6 +10,24 @@ public class FuncionarioVo {
 		this.rowid = rowid;
 		this.nome = nome;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		FuncionarioVo that = (FuncionarioVo) o;
+		return rowid != null ? rowid.equals(that.rowid) : that.rowid == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return rowid != null ? rowid.hashCode() : 0;
+	}
+
+	@Override
+	public String toString() {
+		return "FuncionarioVo [rowid=" + rowid + ", nome=" + nome + "]";
+	}
 
 	public String getRowid() {
 		return rowid;
@@ -24,16 +42,4 @@ public class FuncionarioVo {
 		this.nome = nome;
 	}
 	
-	@Override
-	public String toString() {
-		return "FuncionarioVo [rowid=" + rowid + ", nome=" + nome + "]";
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		FuncionarioVo that = (FuncionarioVo) o;
-		return rowid != null && rowid.equals(that.rowid);
-	}
 }

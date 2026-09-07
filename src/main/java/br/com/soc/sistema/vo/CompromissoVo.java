@@ -22,6 +22,26 @@ public class CompromissoVo {
 		this.agenda = agenda;
 	}
 	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CompromissoVo that = (CompromissoVo) o;
+        return rowid != null ? rowid.equals(that.rowid) : that.rowid == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return rowid != null ? rowid.hashCode() : 0;
+    }
+    
+    @Override
+    public String toString() {
+        return "CompromissoVo {" + "rowid='" + rowid + '\'' + ", horarioCompromisso=" + horarioCompromisso + ", dataCompromisso=" + dataCompromisso +
+                ", funcionario=" + (funcionario != null ? funcionario.toString() : "null") + ", agenda=" + (agenda != null ? agenda.toString() : "null") +
+                '}';
+    }
+	
     public String getRowid() {
         return rowid;
     }
@@ -61,26 +81,4 @@ public class CompromissoVo {
     public void setAgenda(AgendaVo agenda) {
         this.agenda = agenda;
     }
-
-    @Override
-    public String toString() {
-        return "CompromissoVo {" + "rowid='" + rowid + '\'' + ", horarioCompromisso=" + horarioCompromisso + ", dataCompromisso=" + dataCompromisso +
-                ", funcionario=" + (funcionario != null ? funcionario.toString() : "null") + ", agenda=" + (agenda != null ? agenda.toString() : "null") +
-                '}';
-    }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CompromissoVo that = (CompromissoVo) o;
-        return rowid != null ? rowid.equals(that.rowid) : that.rowid == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return rowid != null ? rowid.hashCode() : 0;
-    }
-
-	
 }

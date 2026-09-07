@@ -13,6 +13,24 @@ public class AgendaVo {
 		this.periodo = periodo;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		AgendaVo that = (AgendaVo) o;
+		return rowid != null ? rowid.equals(that.rowid) : that.rowid == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return rowid != null ? rowid.hashCode() : 0;
+	}
+	
+	@Override
+	public String toString() {
+		return "AgendaVo [rowid=" + rowid + ", nome=" + nome + ", periodo=" + periodo+ "]";
+	}
+	
 	public String getRowid() {
 		return rowid;
 	}
@@ -36,10 +54,4 @@ public class AgendaVo {
 	public void setPeriodo(Periodo periodo) {
 		this.periodo = periodo;
 	}
-	
-	@Override
-	public String toString() {
-		return "AgendaVo [rowid=" + rowid + ", nome=" + nome + ", periodo=" + periodo+ "]";
-	}
-	
 }
