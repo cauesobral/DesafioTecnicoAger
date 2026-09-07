@@ -13,6 +13,19 @@
 	
 <package name="br.com.soc.sistema" extends="struts-default" strict-method-invocation="false">
 
+	<global-results>
+	    <result name="erro">/erro.jsp</result>
+	    <result name="erroTecnico">/erroTecnico.jsp</result>
+	</global-results>
+	
+	<global-exception-mappings>
+	    <exception-mapping exception="br.com.soc.sistema.exception.ValidationException" result="erro"/>
+	    <exception-mapping exception="br.com.soc.sistema.exception.BusinessException" result="erro"/>
+	    <exception-mapping exception="br.com.soc.sistema.exception.PersistenceException" result="erroTecnico"/>
+	    <exception-mapping exception="br.com.soc.sistema.exception.TechnicalException" result="erroTecnico"/>
+	    <exception-mapping exception="java.lang.Exception" result="erroTecnico"/>
+	</global-exception-mappings>
+
     <action name="*Funcionarios" class="br.com.soc.sistema.action.FuncionarioAction" method="{1}">
         <result name="success">/funcionario/cadFuncionario_b.jsp</result>
         <result name="input">/funcionario/cadFuncionario_i.jsp</result>
