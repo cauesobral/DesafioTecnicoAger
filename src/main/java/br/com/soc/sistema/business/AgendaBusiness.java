@@ -36,20 +36,24 @@ public class AgendaBusiness {
     }
 
     public void excluirAgenda(String codigo) {
-        try {
-            Integer codigoNumero = Integer.parseInt(codigo);
+    	try {
+    		Integer codigoNumero = Integer.parseInt(codigo);
 
-            AgendaVo agenda = dao.findByCodigo(codigoNumero);
+    		AgendaVo agenda = dao.findByCodigo(codigoNumero);
 
-            if (agenda == null) {
-                throw new BusinessException("Agenda não encontrada.");
-            }
+    		if (agenda == null) {
+    			throw new BusinessException("Agenda não encontrada.");
+    		}
 
-            dao.deleteAgenda(codigoNumero);
+    		if (new CompromissoBusiness().existemCompromissosNaAgenda(codigoNumero)) {
+    			throw new BusinessException("Não é possível excluir uma agenda com compromissos cadastrados.");
+    		}
 
-        } catch (NumberFormatException e) {
-            throw new ValidationException("Código da agenda inválido.");
-        }
+    		dao.deleteAgenda(codigoNumero);
+
+    	} catch (NumberFormatException e) {
+    		throw new ValidationException("Código da agenda inválido.");
+    	}
     }
 
     public AgendaVo buscarAgendaPor(String codigo) {
