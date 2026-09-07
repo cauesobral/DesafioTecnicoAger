@@ -1,5 +1,6 @@
 package br.com.soc.sistema.business;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -112,5 +113,15 @@ public class CompromissoBusiness {
 			case AMBOS:
 				break;
 		}
+	}
+	
+	public List<CompromissoVo> buscarCompromissosPorPeriodo(LocalDate dataInicial, LocalDate dataFinal) {
+		if (dataInicial == null || dataFinal == null) {
+			throw new ValidationException("Data inicial e data final devem ser informadas.");
+		}
+		if (dataInicial.isAfter(dataFinal)) {
+			throw new ValidationException("Data inicial não pode ser posterior à data final.");
+		}
+		return dao.findByPeriodo(dataInicial, dataFinal);
 	}
 }

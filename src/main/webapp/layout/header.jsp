@@ -105,7 +105,8 @@
 				<a href="${urlAgendas}"><s:text name="label.menu.agenda"/></a>
 			</li>
 			<li>
-				<a href="#"><s:text name="label.menu.relatorio"/></a>
+				<s:url action="formularioRelatorios" var="urlRelatorios"/>
+				<a href="${urlRelatorios}"><s:text name="label.menu.relatorio"/></a>
 			</li>
 		</ul>
 

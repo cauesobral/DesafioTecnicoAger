@@ -193,4 +193,39 @@ public class CompromissoDao extends Dao {
 
 		return vo;
 	}
+	
+	public List<CompromissoVo> findByPeriodo(java.time.LocalDate dataInicial, java.time.LocalDate dataFinal) {
+		StringBuilder query = new StringBuilder(
+				"SELECT c.id id, c.dt_compromisso dt_compromisso, c.hr_compromisso hr_compromisso, "
+				+ "f.rowid cod_funcionario, f.nm_funcionario nome_funcionario, "
+				+ "a.id cod_agenda, a.nm_agenda nome_agenda, a.periodo_disponivel periodo_agenda "
+				+ "FROM compromisso c "
+				+ "JOIN funcionario f ON f.rowid = c.cod_funcionario "
+				+ "JOIN agenda a ON a.id = c.cod_agenda "
+				+ "WHERE c.dt_compromisso BETWEEN ? AND ? "
+				+ "ORDER BY c.dt_compromisso, c.hr_compromisso");
+
+		try (
+				Connection connection = getConexao();
+				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
+		) {
+
+			preparedStatement.setDate(1, Date.valueOf(dataInicial));
+			preparedStatement.setDate(2, Date.valueOf(dataFinal));
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+				List<CompromissoVo> compromissos = new ArrayList<>();
+
+				while (resultSet.next()) {
+					compromissos.add(mapearCompromisso(resultSet));
+				}
+
+				return compromissos;
+			}
+
+		} catch (SQLException e) {
+			throw new PersistenceException("Erro ao consultar compromissos por período.", e);
+		}
+	}
 }

@@ -38,3 +38,13 @@ VALUES
     ('Exame Admissional', 'MANHA'),
     ('Exames no Laboratório', 'MANHA'),
     ('Avaliação Psicológica', 'TARDE');
+    
+    
+INSERT INTO compromisso (cod_funcionario, cod_agenda, dt_compromisso, hr_compromisso)
+VALUES
+    (1, 1, '2026-09-10', '09:00:00'),
+    (2, 5, '2026-09-10', '08:30:00'),
+    (3, 4, '2026-09-11', '14:00:00'),
+    (4, 7, '2026-09-11', '16:30:00'),
+    (5, 6, '2026-09-12', '07:15:00');
+    
