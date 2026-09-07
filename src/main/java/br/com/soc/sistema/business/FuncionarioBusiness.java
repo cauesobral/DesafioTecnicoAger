@@ -51,8 +51,8 @@ public class FuncionarioBusiness {
 	public void excluirFuncionario(String codigo) {
 	    try {
 	        Integer codigoNumero = Integer.parseInt(codigo);
+	        new CompromissoBusiness().excluirCompromissosDoFuncionario(codigoNumero);
 	        dao.deleteFuncionario(codigoNumero);
-
 	    } catch (NumberFormatException e) {
 	        throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 	    }
