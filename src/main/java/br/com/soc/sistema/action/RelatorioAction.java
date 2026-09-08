@@ -16,6 +16,7 @@ public class RelatorioAction extends Action {
 	private RelatorioExcelExporter excelExporter = new RelatorioExcelExporter();
 	private RelatorioFilter filtro = new RelatorioFilter();
 	private InputStream excelInputStream;
+	private boolean pesquisado;
 
 	public String formulario() {
 		return SUCCESS;
@@ -26,6 +27,7 @@ public class RelatorioAction extends Action {
 			return INPUT;
 		}
 		compromissos.addAll(business.buscarCompromissosPorPeriodo(filtro.getDataInicial(), filtro.getDataFinal()));
+		pesquisado = true;
 		return SUCCESS;
 	}
 
@@ -44,6 +46,14 @@ public class RelatorioAction extends Action {
 	public void setCompromissos(List<CompromissoVo> compromissos) {
 		this.compromissos = compromissos;
 	}
+	
+	public boolean isPesquisado() {
+		return pesquisado;
+	}
+	public void setPesquisado(boolean pesquisado) {
+		this.pesquisado = pesquisado;
+	}
+	
 	public RelatorioFilter getFiltro() {
 		return filtro;
 	}

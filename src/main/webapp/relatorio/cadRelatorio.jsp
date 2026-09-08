@@ -96,29 +96,36 @@
 			</div>
 
 			<div class="row">
-				<table class="table table-striped align-middle tabela-relatorio mb-0">
-					<thead>
-						<tr>
-							<th><s:text name="label.id"/></th>
-							<th><s:text name="label.funcionario"/></th>
-							<th><s:text name="label.agenda"/></th>
-							<th><s:text name="label.data"/></th>
-							<th><s:text name="label.horario"/></th>
-						</tr>
-					</thead>
-
-					<tbody>
-						<s:iterator value="compromissos" >
+				<s:if test="pesquisado">
+					<table class="table table-striped align-middle tabela-relatorio mb-0">
+						<thead>
 							<tr>
-								<td>${rowid}</td>
-								<td>${funcionario.nome}</td>
-								<td>${agenda.nome}</td>
-								<td>${dataCompromisso}</td>
-								<td>${horarioCompromisso}</td>
+								<th><s:text name="label.id"/></th>
+								<th><s:text name="label.funcionario"/></th>
+								<th><s:text name="label.agenda"/></th>
+								<th><s:text name="label.data"/></th>
+								<th><s:text name="label.horario"/></th>
 							</tr>
-						</s:iterator>
-					</tbody>
-				</table>
+						</thead>
+
+						<tbody>
+							<s:iterator value="compromissos" >
+								<tr>
+									<td>${rowid}</td>
+									<td>${funcionario.nome}</td>
+									<td>${agenda.nome}</td>
+									<td>${dataCompromisso}</td>
+									<td>${horarioCompromisso}</td>
+								</tr>
+							</s:iterator>
+						</tbody>
+					</table>
+				</s:if>
+				<s:else>
+					<div class="text-center text-muted py-4">
+						<s:text name="label.relatorio.semPesquisa"/>
+					</div>
+				</s:else>
 			</div>
 
 			<div class="row mb-5">
