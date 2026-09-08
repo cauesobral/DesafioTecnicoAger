@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.soc.sistema.business.AgendaBusiness;
 import br.com.soc.sistema.business.CompromissoBusiness;
 import br.com.soc.sistema.business.FuncionarioBusiness;
+import br.com.soc.sistema.filter.CompromissoFilter;
 import br.com.soc.sistema.infra.Action;
 import br.com.soc.sistema.vo.AgendaVo;
 import br.com.soc.sistema.vo.CompromissoVo;
@@ -17,6 +18,7 @@ public class CompromissoAction extends Action {
 	private FuncionarioBusiness funcionarioBusiness = new FuncionarioBusiness();
 	private AgendaBusiness agendaBusiness = new AgendaBusiness();
 	private CompromissoVo compromissoVo = new CompromissoVo();
+	private CompromissoFilter filtro = new CompromissoFilter();
 
 	public String todos() {
 		compromissos.addAll(business.trazerTodosOsCompromissos());
@@ -74,5 +76,17 @@ public class CompromissoAction extends Action {
 	}
 	public void setCompromissoVo(CompromissoVo compromissoVo) {
 		this.compromissoVo = compromissoVo;
+	}
+	
+	public String filtrar() {
+		compromissos.addAll(business.filtrarCompromissos(filtro));
+		return SUCCESS;
+	}
+
+	public CompromissoFilter getFiltro() {
+		return filtro;
+	}
+	public void setFiltro(CompromissoFilter filtro) {
+		this.filtro = filtro;
 	}
 }

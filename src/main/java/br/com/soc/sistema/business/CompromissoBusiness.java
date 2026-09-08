@@ -1,5 +1,6 @@
 package br.com.soc.sistema.business;
 
+import br.com.soc.sistema.filter.CompromissoFilter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -123,5 +124,9 @@ public class CompromissoBusiness {
 			throw new ValidationException("Data inicial não pode ser posterior à data final.");
 		}
 		return dao.findByPeriodo(dataInicial, dataFinal);
+	}
+	
+	public List<CompromissoVo> filtrarCompromissos(CompromissoFilter filtro) {
+		return dao.findByFiltro(filtro);
 	}
 }

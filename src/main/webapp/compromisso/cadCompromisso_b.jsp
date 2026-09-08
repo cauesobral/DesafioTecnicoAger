@@ -13,6 +13,38 @@
 			body {
 				background: #f4f6f7;
 			}
+			
+			.filtro-bar {
+				background: #ffffff;
+				border-radius: 8px;
+				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+				padding: 1rem;
+			}
+			
+			.filtro-card {
+				background: #ffffff;
+				border-radius: 8px;
+				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+				padding: 1.25rem 1.5rem;
+			}
+
+			.filtro-card .form-label {
+				font-size: 0.8rem;
+				font-weight: 700;
+				color: #1b9aa0;
+				margin-bottom: 0.3rem;
+			}
+
+			.filtro-card .form-control,
+			.filtro-card .form-select {
+				border: 1px solid #e1e5e8;
+			}
+
+			.filtro-card .form-control:focus,
+			.filtro-card .form-select:focus {
+				border-color: #1b9aa0;
+				box-shadow: 0 0 0 0.2rem rgba(27, 154, 160, 0.15);
+			}
 
 			.btn-teal {
 				background-color: #1b9aa0;
@@ -65,7 +97,69 @@
 	</head>
 	<body>
 		<jsp:include page="/layout/header.jsp"/>
+		
+		<div class="row mt-5 mb-3">
+			<div class="col-sm p-0">
+				<div class="filtro-card">
+					<s:form action="/filtrarCompromissos.action">
+						<div class="row g-3">
+							<div class="col-sm-2">
+								<label class="form-label">Cód. Compromisso</label>
+								<input type="text" class="form-control" name="filtro.codigoCompromisso">
+							</div>
 
+							<div class="col-sm-2">
+								<label class="form-label">Cód. Funcionário</label>
+								<input type="text" class="form-control" name="filtro.codigoFuncionario">
+							</div>
+
+							<div class="col-sm-3">
+								<label class="form-label">Nome Funcionário</label>
+								<input type="text" class="form-control" name="filtro.nomeFuncionario">
+							</div>
+
+							<div class="col-sm-3">
+								<label class="form-label">Agenda</label>
+								<s:select
+									cssClass="form-select"
+									name="filtro.codigoAgenda"
+									list="listaAgendas"
+									headerKey=""
+									headerValue="Todas"
+									listKey="rowid"
+									listValueKey="nome"
+								/>
+							</div>
+
+							<div class="col-sm-2">
+								<label class="form-label">Data</label>
+								<input type="date" class="form-control" name="filtro.data">
+							</div>
+						</div>
+
+						<div class="row g-3 mt-1 align-items-end">
+							<div class="col-sm-3">
+								<label class="form-label">Período</label>
+								<s:select
+									cssClass="form-select"
+									name="filtro.periodo"
+									list="@br.com.soc.sistema.vo.Periodo@values()"
+									headerKey=""
+									headerValue="Todos"
+									listKey="name()"
+									listValueKey="name()"
+								/>
+							</div>
+
+							<div class="col-sm-9 text-end">
+								<button class="btn btn-teal px-4" type="submit">Filtrar</button>
+							</div>
+						</div>
+					</s:form>
+				</div>
+			</div>
+		</div>
+		
 		<div class="container">
 			<div class="row mt-5">
 
