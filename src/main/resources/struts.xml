@@ -12,7 +12,8 @@
 	<constant name="struts.action.excludePattern" value="/webjars/.*,/h2-console/*" />
 	
 <package name="br.com.soc.sistema" extends="struts-default" strict-method-invocation="false">
-
+	
+	<!--
 	<global-results>
 	    <result name="erro">erro/erro.jsp</result>
 	    <result name="erroTecnico">erro/erroTecnico.jsp</result>
@@ -25,6 +26,7 @@
 	    <exception-mapping exception="br.com.soc.sistema.exception.TechnicalException" result="erroTecnico"/>
 	    <exception-mapping exception="java.lang.Exception" result="erroTecnico"/>
 	</global-exception-mappings>
+	-->
 
     <action name="*Funcionarios" class="br.com.soc.sistema.action.FuncionarioAction" method="{1}">
         <result name="success">/funcionario/cadFuncionario_b.jsp</result>
