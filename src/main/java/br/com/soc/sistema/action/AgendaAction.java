@@ -1,10 +1,13 @@
 package br.com.soc.sistema.action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.soc.sistema.business.AgendaBusiness;
+import br.com.soc.sistema.filter.AgendaFilter;
 import br.com.soc.sistema.infra.Action;
+import br.com.soc.sistema.infra.OpcoesComboBuscarAgenda;
 import br.com.soc.sistema.vo.AgendaVo;
 
 public class AgendaAction extends Action {
@@ -12,6 +15,7 @@ public class AgendaAction extends Action {
 	private List<AgendaVo> agendas = new ArrayList<>();
 	private AgendaBusiness business = new AgendaBusiness();
 	private AgendaVo agendaVo = new AgendaVo();
+	private AgendaFilter filtro = new AgendaFilter();
 
 	public String todos() {
 		agendas.addAll(business.trazerTodasAsAgendas());
@@ -20,11 +24,12 @@ public class AgendaAction extends Action {
 	}
 
 	public String filtrar() {
-		if (agendaVo.getNome() == null || agendaVo.getNome().trim().isEmpty()) {
-			agendas.addAll(business.trazerTodasAsAgendas());
-		} else {
-			agendas.addAll(business.filtrarAgendasPorNome(agendaVo.getNome()));
+		if (filtro.isNullOpcoesCombo()) {
+			return REDIRECT;
 		}
+
+		agendas.addAll(business.filtrarAgendas(filtro));
+
 		return SUCCESS;
 	}
 
@@ -59,6 +64,10 @@ public class AgendaAction extends Action {
 		return REDIRECT;
 	}
 
+	public List<OpcoesComboBuscarAgenda> getListaOpcoesCombo() {
+		return Arrays.asList(OpcoesComboBuscarAgenda.values());
+	}
+
 	public List<AgendaVo> getAgendas() {
 		return agendas;
 	}
@@ -73,5 +82,13 @@ public class AgendaAction extends Action {
 
 	public void setAgendaVo(AgendaVo agendaVo) {
 		this.agendaVo = agendaVo;
+	}
+
+	public AgendaFilter getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(AgendaFilter filtro) {
+		this.filtro = filtro;
 	}
 }

@@ -28,6 +28,7 @@
 				font-weight: 700;
 			}
 
+			.filtro-bar .form-select,
 			.filtro-bar .form-control {
 				border: 1px solid #e1e5e8;
 			}
@@ -90,13 +91,24 @@
 					<s:form action="/filtrarAgendas.action">
 						<div class="input-group filtro-bar">
 							<span class="input-group-text">
-								<s:text name="label.nome"/>
-							</span>	
-								<s:textfield cssClass="form-control" id="nome" name="agendaVo.nome"/>
+								<s:text name="label.buscar.por"/>
+							</span>
+								<s:select
+									cssClass="form-select"
+									name="filtro.opcoesCombo"
+									list="listaOpcoesCombo"
+									headerKey=""
+									headerValue="Escolha..."
+									listKey="%{codigo}"
+									listValueKey="%{descricao}"
+									value="filtro.opcoesCombo.codigo"
+								/>
+
+								<s:textfield cssClass="form-control" id="valorBusca" name="filtro.valorBusca"/>
 								<button class="btn btn-teal" type="submit"><s:text name="label.pesquisar"/></button>
 						</div>
-					</s:form>			
-				</div>				
+					</s:form>
+				</div>
 			</div>
 
 			<div class="row">
@@ -202,6 +214,7 @@
 		        });
 		    });
 		</script>
+
 		<jsp:include page="/layout/footer.jsp"/>
 	</body>
 </html>

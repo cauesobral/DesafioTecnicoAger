@@ -167,4 +167,39 @@ public class AgendaDao extends Dao {
 			throw new PersistenceException("Erro ao excluir agenda.", e);
 		}
 	}
+	
+	public List<AgendaVo> findAllByPeriodo(Periodo periodo) {
+		StringBuilder query = new StringBuilder(
+				"SELECT id, nm_agenda nome, periodo_disponivel periodo "
+				+ "FROM agenda "
+				+ "WHERE periodo_disponivel = ?");
+
+		try (
+				Connection connection = getConexao();
+				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
+		) {
+
+			preparedStatement.setString(1, periodo.name());
+
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+				List<AgendaVo> agendas = new ArrayList<>();
+
+				while (resultSet.next()) {
+					AgendaVo vo = new AgendaVo();
+
+					vo.setRowid(resultSet.getString("id"));
+					vo.setNome(resultSet.getString("nome"));
+					vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+
+					agendas.add(vo);
+				}
+
+				return agendas;
+			}
+
+		} catch (SQLException e) {
+			throw new PersistenceException("Erro ao consultar agendas por período.", e);
+		}
+	}
 }
