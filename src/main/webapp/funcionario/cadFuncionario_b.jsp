@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<s:url value="/imagens/soc_aba_logo.png" var="faviconUrl"/>
 		<link rel="icon" href="${faviconUrl}" type="image/png">
-		<title>SOC - Desafio</title>
+		<title>Desafio Técnico</title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
 
 		<style>

@@ -2,8 +2,21 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+
+	body {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+
 	.soc-footer {
+		margin-top: auto;
 		background: #424444ff;
+		flex-shrink: 0;
 		padding: 1.5rem 2rem;
 	}
 

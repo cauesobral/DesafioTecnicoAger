@@ -133,5 +133,6 @@
 		</div>
 
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+		<jsp:include page="/layout/footer.jsp"/>
 	</body>
 </html>

@@ -6,6 +6,7 @@
 		background: #ffffff;
 		position: relative;
 		overflow: hidden;
+		flex-shrink: 0;
 		border-bottom: 3px solid transparent;
 		border-image: linear-gradient(to right, #1b9aa0, #1b9aa0 70%, #f2b705) 1;
 	}

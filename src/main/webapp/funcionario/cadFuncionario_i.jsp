@@ -4,7 +4,9 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title><s:text name="label.titulo.pagina.cadastro"/></title>
+		<s:url value="/imagens/soc_aba_logo.png" var="faviconUrl"/>
+		<link rel="icon" href="${faviconUrl}" type="image/png">
+		<title>Desafio Técnico</title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
 
 		<style>
@@ -101,6 +103,9 @@
 			</s:form>
 		</div>
 
+		<jsp:include page="/layout/footer.jsp"/>
+
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+		<jsp:include page="/layout/footer.jsp"/>
 	</body>
 </html>
