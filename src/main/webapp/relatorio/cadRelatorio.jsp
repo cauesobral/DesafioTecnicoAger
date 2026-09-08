@@ -68,10 +68,9 @@
 		<div class="container">
 			<div class="row mt-5 mb-3">
 				<div class="col-sm p-0">
-					<s:url action="gerarRelatorios" var="urlGerar"/>
 					<s:url action="exportarRelatorios" var="urlExportar"/>
 
-					<s:form action="%{urlGerar}">
+					<s:form action="/gerarRelatorios.action">
 						<div class="filtro-bar row g-3 align-items-end">
 							<div class="col-sm-3">
 								<label class="form-label"><s:text name="label.data.inicial"/></label>
