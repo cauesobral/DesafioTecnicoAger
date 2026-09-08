@@ -97,70 +97,70 @@
 	</head>
 	<body>
 		<jsp:include page="/layout/header.jsp"/>
-		
-		<div class="row mt-5 mb-3">
-			<div class="col-sm p-0">
-				<div class="filtro-card">
-					<s:form action="/filtrarCompromissos.action">
-						<div class="row g-3">
-							<div class="col-sm-2">
-								<label class="form-label">Cód. Compromisso</label>
-								<input type="text" class="form-control" name="filtro.codigoCompromisso">
+
+		<div class="container">
+			<div class="row mt-5 mb-3">
+				<div class="col-sm">
+					<div class="filtro-card">
+						<s:form action="/filtrarCompromissos.action">
+							<div class="row g-3">
+								<div class="col-sm-3">
+									<label class="form-label">Cód. Compromisso</label>
+									<input type="text" class="form-control" name="filtro.codigoCompromisso">
+								</div>
+
+								<div class="col-sm-3">
+									<label class="form-label">Cód. Funcionário</label>
+									<input type="text" class="form-control" name="filtro.codigoFuncionario">
+								</div>
+
+								<div class="col-sm-6">
+									<label class="form-label">Nome Funcionário</label>
+									<input type="text" class="form-control" name="filtro.nomeFuncionario">
+								</div>
 							</div>
 
-							<div class="col-sm-2">
-								<label class="form-label">Cód. Funcionário</label>
-								<input type="text" class="form-control" name="filtro.codigoFuncionario">
-							</div>
+							<div class="row g-3 mt-1 align-items-end">
+								<div class="col-sm-2">
+									<label class="form-label">Período</label>
+									<s:select
+										cssClass="form-select"
+										name="filtro.periodo"
+										list="@br.com.soc.sistema.vo.Periodo@values()"
+										headerKey=""
+										headerValue="Todos"
+										listKey="name()"
+										listValueKey="name()"
+									/>
+								</div>
 
-							<div class="col-sm-3">
-								<label class="form-label">Nome Funcionário</label>
-								<input type="text" class="form-control" name="filtro.nomeFuncionario">
-							</div>
+								<div class="col-sm-3">
+									<label class="form-label">Agenda</label>
+									<s:select
+										cssClass="form-select"
+										name="filtro.codigoAgenda"
+										list="listaAgendas"
+										headerKey=""
+										headerValue="Todas"
+										listKey="rowid"
+										listValueKey="nome"
+									/>
+								</div>
 
-							<div class="col-sm-3">
-								<label class="form-label">Agenda</label>
-								<s:select
-									cssClass="form-select"
-									name="filtro.codigoAgenda"
-									list="listaAgendas"
-									headerKey=""
-									headerValue="Todas"
-									listKey="rowid"
-									listValueKey="nome"
-								/>
-							</div>
+								<div class="col-sm-2">
+									<label class="form-label">Data</label>
+									<input type="date" class="form-control" name="filtro.data">
+								</div>
 
-							<div class="col-sm-2">
-								<label class="form-label">Data</label>
-								<input type="date" class="form-control" name="filtro.data">
+								<div class="col-sm-5 text-end">
+									<button class="btn btn-teal px-4" type="submit">Filtrar</button>
+								</div>
 							</div>
-						</div>
-
-						<div class="row g-3 mt-1 align-items-end">
-							<div class="col-sm-3">
-								<label class="form-label">Período</label>
-								<s:select
-									cssClass="form-select"
-									name="filtro.periodo"
-									list="@br.com.soc.sistema.vo.Periodo@values()"
-									headerKey=""
-									headerValue="Todos"
-									listKey="name()"
-									listValueKey="name()"
-								/>
-							</div>
-
-							<div class="col-sm-9 text-end">
-								<button class="btn btn-teal px-4" type="submit">Filtrar</button>
-							</div>
-						</div>
-					</s:form>
+						</s:form>
+					</div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="container">
+
 			<div class="row mt-5">
 
 				<table class="table table-striped align-middle tabela-compromissos mb-0">
