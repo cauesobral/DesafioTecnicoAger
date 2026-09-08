@@ -87,7 +87,7 @@
 								<td>${rowid}</td>
 								<td>${funcionario.nome}</td>
 								<td>${agenda.nome}</td>
-								<td>${dataCompromisso}</td>
+								<td>${dataFormatada}</td>
 								<td>${horarioCompromisso}</td>
 								<td class="text-end">
 									<s:url action="editarCompromissos" var="editar">

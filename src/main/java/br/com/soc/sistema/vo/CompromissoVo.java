@@ -2,6 +2,7 @@ package br.com.soc.sistema.vo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class CompromissoVo {
@@ -80,5 +81,11 @@ public class CompromissoVo {
 
     public void setAgenda(AgendaVo agenda) {
         this.agenda = agenda;
+    }
+    
+    public String getDataFormatada() {
+    	return dataCompromisso != null
+    			? dataCompromisso.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    			: "";
     }
 }

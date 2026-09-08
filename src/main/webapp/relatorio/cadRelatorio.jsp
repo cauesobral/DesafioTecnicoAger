@@ -113,7 +113,7 @@
 									<td>${rowid}</td>
 									<td>${funcionario.nome}</td>
 									<td>${agenda.nome}</td>
-									<td>${dataCompromisso}</td>
+									<td>${dataFormatada}</td>
 									<td>${horarioCompromisso}</td>
 								</tr>
 							</s:iterator>
