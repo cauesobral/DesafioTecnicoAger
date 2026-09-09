@@ -34,9 +34,14 @@ public class FuncionarioBusiness {
 		return dao.findAllFuncionarios();
 	}
 
+	private static final int TAMANHO_MAXIMO_NOME = 255;
+
 	public void salvarFuncionario(FuncionarioVo funcionarioVo) {
 		if (funcionarioVo.getNome() == null || funcionarioVo.getNome().isEmpty()) {
 			throw new BusinessException("Nome não pode ser em branco.");
+		}
+		if (funcionarioVo.getNome().length() > TAMANHO_MAXIMO_NOME) {
+			throw new BusinessException("Nome não pode ter mais de " + TAMANHO_MAXIMO_NOME + " caracteres.");
 		}
 
 		dao.insertFuncionario(funcionarioVo);
@@ -45,6 +50,9 @@ public class FuncionarioBusiness {
 	public void alterarFuncionario(FuncionarioVo funcionario) {
 		if (funcionario.getNome() == null || funcionario.getNome().isEmpty()) {
 			throw new BusinessException("O nome digitado não pode ser vazio.");
+		}
+		if (funcionario.getNome().length() > TAMANHO_MAXIMO_NOME) {
+			throw new BusinessException("Nome não pode ter mais de " + TAMANHO_MAXIMO_NOME + " caracteres.");
 		}
 		if (funcionario.getRowid() == null || funcionario.getRowid().isEmpty()) {
 			throw new BusinessException("Código do funcionário deve ser informado.");

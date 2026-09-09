@@ -125,18 +125,23 @@ public class AgendaBusiness {
     	return agendas;
     }
 
+    private static final int TAMANHO_MAXIMO_NOME = 255;
+
     private void validarAgenda(AgendaVo agendaVo) {
-        if (agendaVo == null) {
-            throw new ValidationException("Agenda deve ser informada.");
-        }
+    	if (agendaVo == null) {
+    		throw new ValidationException("Agenda deve ser informada.");
+    	}
 
-        if (agendaVo.getNome() == null || agendaVo.getNome().trim().isEmpty()) {
-            throw new ValidationException("Nome da agenda deve ser informado.");
-        }
+    	if (agendaVo.getNome() == null || agendaVo.getNome().trim().isEmpty()) {
+    		throw new ValidationException("Nome da agenda deve ser informado.");
+    	}
+    	if (agendaVo.getNome().length() > TAMANHO_MAXIMO_NOME) {
+    		throw new ValidationException("Nome da agenda não pode ter mais de " + TAMANHO_MAXIMO_NOME + " caracteres.");
+    	}
 
-        if (agendaVo.getPeriodo() == null) {
-            throw new ValidationException("Período disponível deve ser informado.");
-        }
+    	if (agendaVo.getPeriodo() == null) {
+    		throw new ValidationException("Período disponível deve ser informado.");
+    	}
     }
 
     private String removerAcentos(String texto) {

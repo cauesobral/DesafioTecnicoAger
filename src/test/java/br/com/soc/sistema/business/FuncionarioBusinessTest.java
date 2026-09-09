@@ -96,4 +96,16 @@ class FuncionarioBusinessTest {
 
 		assertThrows(BusinessException.class, () -> funcionarioBusiness.filtrarFuncionarios(filtro));
 	}
+	
+	@Test
+	void naoDeveSalvarFuncionarioComNomeMuitoLongo() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 256; i++) {
+			sb.append("a");
+		}
+		FuncionarioVo funcionario = new FuncionarioVo(null, sb.toString());
+
+		assertThrows(BusinessException.class, () -> funcionarioBusiness.salvarFuncionario(funcionario));
+		verify(dao, never()).insertFuncionario(any());
+	}
 }

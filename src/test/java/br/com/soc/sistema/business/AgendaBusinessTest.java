@@ -169,4 +169,16 @@ class AgendaBusinessTest {
 
 		assertThrows(ValidationException.class, () -> agendaBusiness.filtrarAgendas(filtro));
 	}
+	
+	@Test
+	void naoDeveSalvarAgendaComNomeMuitoLongo() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < 256; i++) {
+			sb.append("a");
+		}
+		AgendaVo agenda = new AgendaVo(null, sb.toString(), Periodo.AMBOS);
+
+		assertThrows(ValidationException.class, () -> agendaBusiness.salvarAgenda(agenda));
+		verify(dao, never()).insertAgenda(any());
+	}
 }
