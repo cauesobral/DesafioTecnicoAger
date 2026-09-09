@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import br.com.soc.sistema.exception.PersistenceException;
@@ -18,16 +17,16 @@ public class AgendaDao extends Dao {
 		StringBuilder query = new StringBuilder(
 				"INSERT INTO agenda (nm_agenda, periodo_disponivel) VALUES (?, ?)");
 
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
-		) {
+		try {
+			Connection connection = getConexao();
 
-			int i = 1;
-			preparedStatement.setString(i++, agendaVo.getNome());
-			preparedStatement.setString(i++, agendaVo.getPeriodo().name());
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+				int i = 1;
+				preparedStatement.setString(i++, agendaVo.getNome());
+				preparedStatement.setString(i++, agendaVo.getPeriodo().name());
 
-			preparedStatement.executeUpdate();
+				preparedStatement.executeUpdate();
+			}
 
 		} catch (SQLException e) {
 			throw new PersistenceException("Erro ao inserir agenda.", e);
@@ -37,25 +36,28 @@ public class AgendaDao extends Dao {
 	public List<AgendaVo> findAllAgendas() {
 		StringBuilder query = new StringBuilder("SELECT id, nm_agenda nome, periodo_disponivel periodo FROM agenda");
 
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
-				ResultSet resultSet = preparedStatement.executeQuery()
-		) {
+		try {
+			Connection connection = getConexao();
 
-			List<AgendaVo> agendas = new ArrayList<>();
+			try (
+					PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
+					ResultSet resultSet = preparedStatement.executeQuery()
+			) {
 
-			while (resultSet.next()) {
-				AgendaVo vo = new AgendaVo();
+				List<AgendaVo> agendas = new ArrayList<>();
 
-				vo.setRowid(resultSet.getString("id"));
-				vo.setNome(resultSet.getString("nome"));
-				vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+				while (resultSet.next()) {
+					AgendaVo vo = new AgendaVo();
 
-				agendas.add(vo);
+					vo.setRowid(resultSet.getString("id"));
+					vo.setNome(resultSet.getString("nome"));
+					vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+
+					agendas.add(vo);
+				}
+
+				return agendas;
 			}
-
-			return agendas;
 
 		} catch (SQLException e) {
 			throw new PersistenceException("Erro ao consultar agendas.", e);
@@ -67,26 +69,26 @@ public class AgendaDao extends Dao {
 				"SELECT id, nm_agenda nome, periodo_disponivel periodo "
 				+ "FROM agenda WHERE id = ?");
 
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
-		) {
+		try {
+			Connection connection = getConexao();
 
-			preparedStatement.setInt(1, codigo);
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+				preparedStatement.setInt(1, codigo);
 
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-				AgendaVo vo = null;
+					AgendaVo vo = null;
 
-				if (resultSet.next()) {
-					vo = new AgendaVo();
+					if (resultSet.next()) {
+						vo = new AgendaVo();
 
-					vo.setRowid(resultSet.getString("id"));
-					vo.setNome(resultSet.getString("nome"));
-					vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+						vo.setRowid(resultSet.getString("id"));
+						vo.setNome(resultSet.getString("nome"));
+						vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+					}
+
+					return vo;
 				}
-
-				return vo;
 			}
 
 		} catch (SQLException e) {
@@ -100,32 +102,67 @@ public class AgendaDao extends Dao {
 				+ "FROM agenda "
 				+ "WHERE lower(nm_agenda) like lower(?)");
 
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
-		) {
+		try {
+			Connection connection = getConexao();
 
-			preparedStatement.setString(1, "%" + nome + "%");
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+				preparedStatement.setString(1, "%" + nome + "%");
 
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
-				List<AgendaVo> agendas = new ArrayList<>();
+					List<AgendaVo> agendas = new ArrayList<>();
 
-				while (resultSet.next()) {
-					AgendaVo vo = new AgendaVo();
+					while (resultSet.next()) {
+						AgendaVo vo = new AgendaVo();
 
-					vo.setRowid(resultSet.getString("id"));
-					vo.setNome(resultSet.getString("nome"));
-					vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+						vo.setRowid(resultSet.getString("id"));
+						vo.setNome(resultSet.getString("nome"));
+						vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
 
-					agendas.add(vo);
+						agendas.add(vo);
+					}
+
+					return agendas;
 				}
-
-				return agendas;
 			}
 
 		} catch (SQLException e) {
 			throw new PersistenceException("Erro ao consultar agendas por nome.", e);
+		}
+	}
+
+	public List<AgendaVo> findAllByPeriodo(Periodo periodo) {
+		StringBuilder query = new StringBuilder(
+				"SELECT id, nm_agenda nome, periodo_disponivel periodo "
+				+ "FROM agenda "
+				+ "WHERE periodo_disponivel = ?");
+
+		try {
+			Connection connection = getConexao();
+
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+				preparedStatement.setString(1, periodo.name());
+
+				try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+					List<AgendaVo> agendas = new ArrayList<>();
+
+					while (resultSet.next()) {
+						AgendaVo vo = new AgendaVo();
+
+						vo.setRowid(resultSet.getString("id"));
+						vo.setNome(resultSet.getString("nome"));
+						vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
+
+						agendas.add(vo);
+					}
+
+					return agendas;
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new PersistenceException("Erro ao consultar agendas por período.", e);
 		}
 	}
 
@@ -134,17 +171,17 @@ public class AgendaDao extends Dao {
 				"UPDATE agenda SET nm_agenda = ?, periodo_disponivel = ? "
 				+ "WHERE id = ?");
 
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
-		) {
+		try {
+			Connection connection = getConexao();
 
-			int i = 1;
-			preparedStatement.setString(i++, agendaVo.getNome());
-			preparedStatement.setString(i++, agendaVo.getPeriodo().name());
-			preparedStatement.setInt(i++, Integer.parseInt(agendaVo.getRowid()));
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+				int i = 1;
+				preparedStatement.setString(i++, agendaVo.getNome());
+				preparedStatement.setString(i++, agendaVo.getPeriodo().name());
+				preparedStatement.setInt(i++, Integer.parseInt(agendaVo.getRowid()));
 
-			preparedStatement.executeUpdate();
+				preparedStatement.executeUpdate();
+			}
 
 		} catch (SQLException e) {
 			throw new PersistenceException("Erro ao alterar agenda.", e);
@@ -152,54 +189,18 @@ public class AgendaDao extends Dao {
 	}
 
 	public void deleteAgenda(Integer codigo) {
-		StringBuilder query = new StringBuilder(
-				"DELETE FROM agenda WHERE id = ?");
+		StringBuilder query = new StringBuilder("DELETE FROM agenda WHERE id = ?");
 
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
-		) {
+		try {
+			Connection connection = getConexao();
 
-			preparedStatement.setInt(1, codigo);
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new PersistenceException("Erro ao excluir agenda.", e);
-		}
-	}
-	
-	public List<AgendaVo> findAllByPeriodo(Periodo periodo) {
-		StringBuilder query = new StringBuilder(
-				"SELECT id, nm_agenda nome, periodo_disponivel periodo "
-				+ "FROM agenda "
-				+ "WHERE periodo_disponivel = ?");
-
-		try (
-				Connection connection = getConexao();
-				PreparedStatement preparedStatement = connection.prepareStatement(query.toString())
-		) {
-
-			preparedStatement.setString(1, periodo.name());
-
-			try (ResultSet resultSet = preparedStatement.executeQuery()) {
-
-				List<AgendaVo> agendas = new ArrayList<>();
-
-				while (resultSet.next()) {
-					AgendaVo vo = new AgendaVo();
-
-					vo.setRowid(resultSet.getString("id"));
-					vo.setNome(resultSet.getString("nome"));
-					vo.setPeriodo(Periodo.valueOf(resultSet.getString("periodo")));
-
-					agendas.add(vo);
-				}
-
-				return agendas;
+			try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
+				preparedStatement.setInt(1, codigo);
+				preparedStatement.executeUpdate();
 			}
 
 		} catch (SQLException e) {
-			throw new PersistenceException("Erro ao consultar agendas por período.", e);
+			throw new PersistenceException("Erro ao excluir agenda.", e);
 		}
 	}
 }
