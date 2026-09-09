@@ -8,48 +8,10 @@
 		<link rel="icon" href="${faviconUrl}" type="image/png">
 		<title>Desafio Técnico</title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
-
-		<style>
-			body {
-				background: #f4f6f7;
-			}
-
-			.card-soc {
-				background: #ffffff;
-				border: none;
-				border-radius: 8px;
-				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-				overflow: hidden;
-			}
-
-			.card-soc .card-header {
-				background: #1b9aa0;
-				border-bottom: 3px solid #f2b705;
-				color: #ffffff;
-			}
-
-			.card-soc .card-header .card-title {
-				color: #ffffff;
-				margin: 0;
-			}
-
-			.card-soc .card-footer {
-				background: #ffffff;
-				border-top: 1px solid #e1e5e8;
-			}
-
-			.btn-teal {
-				background-color: #1b9aa0;
-				border-color: #1b9aa0;
-				color: #fff;
-			}
-
-			.btn-teal:hover {
-				background-color: #157a80;
-				border-color: #157a80;
-				color: #fff;
-			}
-		</style>
+		<s:url value="/estilos/global.css" var="cssGlobal"/>
+		<link rel='stylesheet' href='${cssGlobal}'>
+		<s:url value="/estilos/compromisso.css" var="cssCompromisso"/>
+		<link rel='stylesheet' href='${cssCompromisso}'>
 	</head>
 	<body>
 		<jsp:include page="/layout/header.jsp"/>

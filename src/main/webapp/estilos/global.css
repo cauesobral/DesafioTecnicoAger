@@ -1,0 +1,112 @@
+body {
+	background: #f4f6f7;
+}
+
+.btn-teal {
+	background-color: #1b9aa0;
+	border-color: #1b9aa0;
+	color: #fff;
+}
+
+.btn-teal:hover {
+	background-color: #157a80;
+	border-color: #157a80;
+	color: #fff;
+}
+
+.btn-gold {
+	background-color: #f2b705;
+	border-color: #f2b705;
+	color: #3a3a3a;
+}
+
+.btn-gold:hover {
+	background-color: #d9a400;
+	border-color: #d9a400;
+	color: #3a3a3a;
+}
+
+.tabela-listagem {
+	background: #ffffff;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.tabela-listagem thead {
+	background: #1b9aa0;
+}
+
+.tabela-listagem thead th {
+	color: #ffffff;
+	border-bottom: 3px solid #f2b705;
+}
+
+.tabela-listagem tbody tr:hover {
+	background-color: #eef7f7;
+}
+
+.tabela-listagem tfoot {
+	background: #ffffff;
+}
+
+.filtro-bar {
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+	padding: 0.4rem;
+}
+
+.filtro-bar .input-group-text {
+	background: #ffffff;
+	border: none;
+	color: #1b9aa0;
+	font-weight: 700;
+}
+
+.filtro-bar .form-select,
+.filtro-bar .form-control {
+	border: 1px solid #e1e5e8;
+}
+
+.card-soc {
+	background: #ffffff;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+	overflow: hidden;
+}
+
+.card-soc .card-header {
+	background: #1b9aa0;
+	border-bottom: 3px solid #f2b705;
+	color: #ffffff;
+}
+
+.card-soc .card-header .card-title {
+	color: #ffffff;
+	margin: 0;
+}
+
+.card-soc .card-footer {
+	background: #ffffff;
+	border-top: 1px solid #e1e5e8;
+}
+
+.card-erro {
+	background: #ffffff;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+	overflow: hidden;
+}
+
+.card-erro .card-header {
+	background: #f2b705;
+	color: #3a3a3a;
+}
+
+.card-erro.card-erro-tecnico .card-header {
+	background: #c0392b;
+	color: #ffffff;
+}

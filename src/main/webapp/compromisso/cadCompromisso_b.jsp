@@ -8,92 +8,10 @@
 		<link rel="icon" href="${faviconUrl}" type="image/png">
 		<title>Desafio Técnico</title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
-
-		<style>
-			body {
-				background: #f4f6f7;
-			}
-			
-			.filtro-bar {
-				background: #ffffff;
-				border-radius: 8px;
-				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-				padding: 1rem;
-			}
-			
-			.filtro-card {
-				background: #ffffff;
-				border-radius: 8px;
-				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-				padding: 1.25rem 1.5rem;
-			}
-
-			.filtro-card .form-label {
-				font-size: 0.8rem;
-				font-weight: 700;
-				color: #1b9aa0;
-				margin-bottom: 0.3rem;
-			}
-
-			.filtro-card .form-control,
-			.filtro-card .form-select {
-				border: 1px solid #e1e5e8;
-			}
-
-			.filtro-card .form-control:focus,
-			.filtro-card .form-select:focus {
-				border-color: #1b9aa0;
-				box-shadow: 0 0 0 0.2rem rgba(27, 154, 160, 0.15);
-			}
-
-			.btn-teal {
-				background-color: #1b9aa0;
-				border-color: #1b9aa0;
-				color: #fff;
-			}
-
-			.btn-teal:hover {
-				background-color: #157a80;
-				border-color: #157a80;
-				color: #fff;
-			}
-
-			.btn-gold {
-				background-color: #f2b705;
-				border-color: #f2b705;
-				color: #3a3a3a;
-			}
-
-			.btn-gold:hover {
-				background-color: #d9a400;
-				border-color: #d9a400;
-				color: #3a3a3a;
-			}
-
-			.tabela-compromissos {
-				background: #ffffff;
-				border-radius: 8px;
-				overflow: hidden;
-				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-			}
-
-			.tabela-compromissos thead {
-				background: #1b9aa0;
-			}
-
-			.tabela-compromissos thead th {
-				color: #ffffff;
-				border-bottom: 3px solid #f2b705;
-			}
-
-			.tabela-compromissos tbody tr:hover {
-				background-color: #eef7f7;
-			}
-
-			.tabela-compromissos tfoot {
-				background: #ffffff;
-			}
-		</style>
+		<s:url value="/estilos/global.css" var="cssGlobal"/>
+		<link rel='stylesheet' href='${cssGlobal}'>
+		<s:url value="/estilos/compromisso.css" var="cssCompromisso"/>
+		<link rel='stylesheet' href='${cssCompromisso}'>
 	</head>
 	<body>
 		<jsp:include page="/layout/header.jsp"/>
@@ -163,7 +81,7 @@
 
 			<div class="row mt-5">
 
-				<table class="table table-striped align-middle tabela-compromissos mb-0">
+				<table class="table table-striped align-middle tabela-listagem mb-0">
 					<thead>
 						<tr>
 							<th><s:text name="label.id"/></th>

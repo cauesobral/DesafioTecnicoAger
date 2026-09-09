@@ -8,79 +8,10 @@
 		<link rel="icon" href="${faviconUrl}" type="image/png">
 		<title>Desafio Técnico</title>
 		<link rel='stylesheet' href='webjars/bootstrap/5.1.3/css/bootstrap.min.css'>
-
-		<style>
-			body {
-				background: #f4f6f7;
-			}
-
-			.filtro-bar {
-				background: #ffffff;
-				border-radius: 8px;
-				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-				padding: 0.4rem;
-			}
-
-			.filtro-bar .input-group-text {
-				background: #ffffff;
-				border: none;
-				color: #1b9aa0;
-				font-weight: 700;
-			}
-
-			.filtro-bar .form-select,
-			.filtro-bar .form-control {
-				border: 1px solid #e1e5e8;
-			}
-
-			.btn-teal {
-				background-color: #1b9aa0;
-				border-color: #1b9aa0;
-				color: #fff;
-			}
-
-			.btn-teal:hover {
-				background-color: #157a80;
-				border-color: #157a80;
-				color: #fff;
-			}
-
-			.btn-gold {
-				background-color: #f2b705;
-				border-color: #f2b705;
-				color: #3a3a3a;
-			}
-
-			.btn-gold:hover {
-				background-color: #d9a400;
-				border-color: #d9a400;
-				color: #3a3a3a;
-			}
-
-			.tabela-agendas {
-				background: #ffffff;
-				border-radius: 8px;
-				overflow: hidden;
-				box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-			}
-
-			.tabela-agendas thead {
-				background: #1b9aa0;
-			}
-
-			.tabela-agendas thead th {
-				color: #ffffff;
-				border-bottom: 3px solid #f2b705;
-			}
-
-			.tabela-agendas tbody tr:hover {
-				background-color: #eef7f7;
-			}
-
-			.tabela-agendas tfoot {
-				background: #ffffff;
-			}
-		</style>
+		<s:url value="/estilos/global.css" var="cssGlobal"/>
+		<link rel='stylesheet' href='${cssGlobal}'>
+		<s:url value="/estilos/agenda.css" var="cssAgenda"/>
+		<link rel='stylesheet' href='${cssAgenda}'>
 	</head>
 	<body>
 		<jsp:include page="/layout/header.jsp"/>
@@ -112,7 +43,7 @@
 			</div>
 
 			<div class="row">
-				<table class="table table-striped align-middle tabela-agendas mb-0">
+				<table class="table table-striped align-middle tabela-listagem mb-0">
 					<thead>
 						<tr>
 							<th><s:text name="label.id"/></th>
