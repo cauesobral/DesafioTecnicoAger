@@ -28,7 +28,14 @@
 							</div>
 
 							<div class="col-sm">
-								<h5 class="card-title">Novo Funcionário</h5>
+								<h5 class="card-title">
+									<s:if test="funcionarioVo.rowid != null && funcionarioVo.rowid != ''">
+										Editar Funcionário
+									</s:if>
+									<s:else>
+										Novo Funcionário
+									</s:else>
+								</h5>
 							</div>
 						</div>
 					</div>
@@ -58,7 +65,7 @@
 					<div class="card-footer">
 						<div class="form-row">
 							<button class="btn btn-teal col-sm-4 offset-sm-1">Salvar</button>
-							<button type="reset" class="btn btn-secondary col-sm-4 offset-sm-2">Limpar Formulario</button>
+							<button type="button" class="btn btn-secondary col-sm-4 offset-sm-2" onclick="document.getElementById('nome').value='';">Limpar Formulario</button>
 						</div>
 					</div>
 				</div>
