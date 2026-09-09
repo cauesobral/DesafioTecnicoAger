@@ -17,7 +17,15 @@ import br.com.soc.sistema.vo.FuncionarioVo;
 import br.com.soc.sistema.vo.Periodo;
 
 public class CompromissoDao extends Dao {
-
+	
+	private static final String QUERY_BASE_COMPROMISSO =
+			"SELECT c.id id, c.dt_compromisso dt_compromisso, c.hr_compromisso hr_compromisso, "
+			+ "f.rowid cod_funcionario, f.nm_funcionario nome_funcionario, "
+			+ "a.id cod_agenda, a.nm_agenda nome_agenda, a.periodo_disponivel periodo_agenda "
+			+ "FROM compromisso c "
+			+ "JOIN funcionario f ON f.rowid = c.cod_funcionario "
+			+ "JOIN agenda a ON a.id = c.cod_agenda";
+	
 	public void insertCompromisso(CompromissoVo compromissoVo) {
 		StringBuilder query = new StringBuilder(
 				"INSERT INTO compromisso (cod_funcionario, cod_agenda, dt_compromisso, hr_compromisso) VALUES (?, ?, ?, ?)");
@@ -41,13 +49,7 @@ public class CompromissoDao extends Dao {
 	}
 
 	public List<CompromissoVo> findAllCompromissos() {
-		StringBuilder query = new StringBuilder(
-				"SELECT c.id id, c.dt_compromisso dt_compromisso, c.hr_compromisso hr_compromisso, "
-				+ "f.rowid cod_funcionario, f.nm_funcionario nome_funcionario, "
-				+ "a.id cod_agenda, a.nm_agenda nome_agenda, a.periodo_disponivel periodo_agenda "
-				+ "FROM compromisso c "
-				+ "JOIN funcionario f ON f.rowid = c.cod_funcionario "
-				+ "JOIN agenda a ON a.id = c.cod_agenda");
+		StringBuilder query = new StringBuilder(QUERY_BASE_COMPROMISSO);
 
 		try {
 			Connection connection = getConexao();
@@ -72,14 +74,8 @@ public class CompromissoDao extends Dao {
 	}
 
 	public CompromissoVo findByCodigo(Integer codigo) {
-		StringBuilder query = new StringBuilder(
-				"SELECT c.id id, c.dt_compromisso dt_compromisso, c.hr_compromisso hr_compromisso, "
-				+ "f.rowid cod_funcionario, f.nm_funcionario nome_funcionario, "
-				+ "a.id cod_agenda, a.nm_agenda nome_agenda, a.periodo_disponivel periodo_agenda "
-				+ "FROM compromisso c "
-				+ "JOIN funcionario f ON f.rowid = c.cod_funcionario "
-				+ "JOIN agenda a ON a.id = c.cod_agenda "
-				+ "WHERE c.id = ?");
+		StringBuilder query = new StringBuilder(QUERY_BASE_COMPROMISSO)
+				.append(" WHERE c.id = ?");
 
 		try {
 			Connection connection = getConexao();
@@ -103,15 +99,9 @@ public class CompromissoDao extends Dao {
 	}
 
 	public List<CompromissoVo> findByPeriodo(java.time.LocalDate dataInicial, java.time.LocalDate dataFinal) {
-		StringBuilder query = new StringBuilder(
-				"SELECT c.id id, c.dt_compromisso dt_compromisso, c.hr_compromisso hr_compromisso, "
-				+ "f.rowid cod_funcionario, f.nm_funcionario nome_funcionario, "
-				+ "a.id cod_agenda, a.nm_agenda nome_agenda, a.periodo_disponivel periodo_agenda "
-				+ "FROM compromisso c "
-				+ "JOIN funcionario f ON f.rowid = c.cod_funcionario "
-				+ "JOIN agenda a ON a.id = c.cod_agenda "
-				+ "WHERE c.dt_compromisso BETWEEN ? AND ? "
-				+ "ORDER BY c.dt_compromisso, c.hr_compromisso");
+		StringBuilder query = new StringBuilder(QUERY_BASE_COMPROMISSO)
+				.append(" WHERE c.dt_compromisso BETWEEN ? AND ? ")
+				.append("ORDER BY c.dt_compromisso, c.hr_compromisso");
 
 		try {
 			Connection connection = getConexao();
@@ -138,14 +128,8 @@ public class CompromissoDao extends Dao {
 	}
 
 	public List<CompromissoVo> findByFiltro(CompromissoFilter filtro) {
-		StringBuilder query = new StringBuilder(
-				"SELECT c.id id, c.dt_compromisso dt_compromisso, c.hr_compromisso hr_compromisso, "
-				+ "f.rowid cod_funcionario, f.nm_funcionario nome_funcionario, "
-				+ "a.id cod_agenda, a.nm_agenda nome_agenda, a.periodo_disponivel periodo_agenda "
-				+ "FROM compromisso c "
-				+ "JOIN funcionario f ON f.rowid = c.cod_funcionario "
-				+ "JOIN agenda a ON a.id = c.cod_agenda "
-				+ "WHERE 1=1");
+		StringBuilder query = new StringBuilder(QUERY_BASE_COMPROMISSO)
+				.append(" WHERE 1=1");
 
 		List<Object> parametros = new ArrayList<>();
 
