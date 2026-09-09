@@ -12,9 +12,22 @@ public class FuncionarioBusiness {
 
 	private static final String FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO = "Foi informado um caracter no lugar de um numero";
 	private FuncionarioDao dao;
+	private CompromissoBusiness compromissoBusiness;
 
 	public FuncionarioBusiness() {
 		this.dao = new FuncionarioDao();
+	}
+
+	FuncionarioBusiness(FuncionarioDao dao, CompromissoBusiness compromissoBusiness) {
+		this.dao = dao;
+		this.compromissoBusiness = compromissoBusiness;
+	}
+
+	private CompromissoBusiness getCompromissoBusiness() {
+		if (compromissoBusiness == null) {
+			compromissoBusiness = new CompromissoBusiness();
+		}
+		return compromissoBusiness;
 	}
 
 	public List<FuncionarioVo> trazerTodosOsFuncionarios(){
@@ -43,7 +56,7 @@ public class FuncionarioBusiness {
 	public void excluirFuncionario(String codigo) {
 		try {
 			Integer codigoNumero = Integer.parseInt(codigo);
-			new CompromissoBusiness().excluirCompromissosDoFuncionario(codigoNumero);
+			getCompromissoBusiness().excluirCompromissosDoFuncionario(codigoNumero);
 			dao.deleteFuncionario(codigoNumero);
 		} catch (NumberFormatException e) {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);

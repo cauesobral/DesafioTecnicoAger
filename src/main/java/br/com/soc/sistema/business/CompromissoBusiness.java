@@ -1,6 +1,5 @@
 package br.com.soc.sistema.business;
 
-import br.com.soc.sistema.filter.CompromissoFilter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.List;
 import br.com.soc.sistema.dao.CompromissoDao;
 import br.com.soc.sistema.exception.BusinessException;
 import br.com.soc.sistema.exception.ValidationException;
+import br.com.soc.sistema.filter.CompromissoFilter;
 import br.com.soc.sistema.vo.AgendaVo;
 import br.com.soc.sistema.vo.CompromissoVo;
 import br.com.soc.sistema.vo.Periodo;
@@ -25,6 +25,11 @@ public class CompromissoBusiness {
 	public CompromissoBusiness() {
 		this.dao = new CompromissoDao();
 		this.agendaBusiness = new AgendaBusiness();
+	}
+
+	CompromissoBusiness(CompromissoDao dao, AgendaBusiness agendaBusiness) {
+		this.dao = dao;
+		this.agendaBusiness = agendaBusiness;
 	}
 
 	public List<CompromissoVo> trazerTodosOsCompromissos() {
@@ -115,7 +120,7 @@ public class CompromissoBusiness {
 				break;
 		}
 	}
-	
+
 	public List<CompromissoVo> buscarCompromissosPorPeriodo(LocalDate dataInicial, LocalDate dataFinal) {
 		if (dataInicial == null || dataFinal == null) {
 			throw new ValidationException("Data inicial e data final devem ser informadas.");
@@ -125,7 +130,7 @@ public class CompromissoBusiness {
 		}
 		return dao.findByPeriodo(dataInicial, dataFinal);
 	}
-	
+
 	public List<CompromissoVo> filtrarCompromissos(CompromissoFilter filtro) {
 		return dao.findByFiltro(filtro);
 	}

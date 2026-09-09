@@ -14,9 +14,22 @@ import br.com.soc.sistema.vo.Periodo;
 public class AgendaBusiness {
 
     private AgendaDao dao;
+    private CompromissoBusiness compromissoBusiness;
 
     public AgendaBusiness() {
         this.dao = new AgendaDao();
+    }
+
+    AgendaBusiness(AgendaDao dao, CompromissoBusiness compromissoBusiness) {
+        this.dao = dao;
+        this.compromissoBusiness = compromissoBusiness;
+    }
+
+    private CompromissoBusiness getCompromissoBusiness() {
+        if (compromissoBusiness == null) {
+            compromissoBusiness = new CompromissoBusiness();
+        }
+        return compromissoBusiness;
     }
 
     public List<AgendaVo> trazerTodasAsAgendas() {
@@ -49,7 +62,7 @@ public class AgendaBusiness {
     			throw new BusinessException("Agenda não encontrada.");
     		}
 
-    		if (new CompromissoBusiness().existemCompromissosNaAgenda(codigoNumero)) {
+    		if (getCompromissoBusiness().existemCompromissosNaAgenda(codigoNumero)) {
     			throw new BusinessException("Não é possível excluir uma agenda com compromissos cadastrados.");
     		}
 
@@ -125,7 +138,7 @@ public class AgendaBusiness {
             throw new ValidationException("Período disponível deve ser informado.");
         }
     }
-    
+
     private String removerAcentos(String texto) {
     	String textoNormalizado = Normalizer.normalize(texto, Normalizer.Form.NFD);
     	return textoNormalizado.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
