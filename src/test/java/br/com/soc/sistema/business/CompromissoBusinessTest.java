@@ -92,7 +92,14 @@ class CompromissoBusinessTest {
 
 	@Test
 	void naoDeveAlterarCompromissoSemCodigo() {
-		CompromissoVo compromisso = compromissoValido(LocalTime.of(8, 0), Periodo.MANHA);
+		FuncionarioVo funcionario = new FuncionarioVo("1", "João Silva");
+		AgendaVo agenda = new AgendaVo("2", "Consultório", Periodo.MANHA);
+
+		CompromissoVo compromisso = new CompromissoVo();
+		compromisso.setFuncionario(funcionario);
+		compromisso.setAgenda(agenda);
+		compromisso.setDataCompromisso(LocalDate.of(2026, 9, 10));
+		compromisso.setHorarioCompromisso(LocalTime.of(8, 0));
 
 		assertThrows(ValidationException.class, () -> compromissoBusiness.alterarCompromisso(compromisso));
 		verify(dao, never()).updateCompromisso(any());
