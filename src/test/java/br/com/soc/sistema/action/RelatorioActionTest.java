@@ -3,8 +3,10 @@ package br.com.soc.sistema.action;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -66,7 +68,8 @@ class RelatorioActionTest {
 		relatorioAction.getFiltro().setDataInicial(inicio);
 		relatorioAction.getFiltro().setDataFinal(fim);
 
-		when(business.buscarCompromissosPorPeriodo(inicio, fim)).thenReturn(List.of(compromissoQualquer()));
+		List<CompromissoVo> compromissos = Arrays.asList(compromissoQualquer());
+		when(business.buscarCompromissosPorPeriodo(inicio, fim)).thenReturn(compromissos);
 
 		String resultado = relatorioAction.gerar();
 
@@ -91,10 +94,10 @@ class RelatorioActionTest {
 		relatorioAction.getFiltro().setDataInicial(inicio);
 		relatorioAction.getFiltro().setDataFinal(fim);
 
-		List<CompromissoVo> compromissos = List.of(compromissoQualquer());
+		List<CompromissoVo> compromissos = Arrays.asList(compromissoQualquer());
 		when(business.buscarCompromissosPorPeriodo(inicio, fim)).thenReturn(compromissos);
 
-		InputStream streamFalso = InputStream.nullInputStream();
+		InputStream streamFalso = new ByteArrayInputStream(new byte[0]);
 		when(excelExporter.exportar(compromissos)).thenReturn(streamFalso);
 
 		String resultado = relatorioAction.exportar();
