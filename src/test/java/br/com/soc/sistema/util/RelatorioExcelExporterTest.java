@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -64,7 +65,7 @@ class RelatorioExcelExporterTest {
 
 	@Test
 	void deveEscreverDadosDoCompromissoNaLinhaCorreta() throws IOException {
-		List<CompromissoVo> compromissos = List.of(compromisso("10", "João Silva", "Consultório"));
+		List<CompromissoVo> compromissos = Arrays.asList(compromisso("10", "João Silva", "Consultório"));
 
 		InputStream resultado = exporter.exportar(compromissos);
 
@@ -84,7 +85,7 @@ class RelatorioExcelExporterTest {
 
 	@Test
 	void deveEscreverMultiplosCompromissosEmLinhasSequenciais() throws IOException {
-		List<CompromissoVo> compromissos = List.of(
+		List<CompromissoVo> compromissos = Arrays.asList(
 				compromisso("1", "João Silva", "Sala A"),
 				compromisso("2", "Maria Santos", "Sala B")
 		);

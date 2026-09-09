@@ -3,6 +3,7 @@ package br.com.soc.sistema.action;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ class AgendaActionTest {
 
 	@Test
 	void deveListarTodasAsAgendas() {
-		List<AgendaVo> agendas = List.of(new AgendaVo("1", "Sala de Reunião", Periodo.AMBOS));
+		List<AgendaVo> agendas = Arrays.asList(new AgendaVo("1", "Sala de Reunião", Periodo.AMBOS));
 		when(business.trazerTodasAsAgendas()).thenReturn(agendas);
 
 		String resultado = agendaAction.todos();
@@ -51,7 +52,7 @@ class AgendaActionTest {
 		agendaAction.getFiltro().setValorBusca("Sala");
 
 		when(business.filtrarAgendas(agendaAction.getFiltro()))
-				.thenReturn(List.of(new AgendaVo("1", "Sala de Reunião", Periodo.AMBOS)));
+				.thenReturn(Arrays.asList(new AgendaVo("1", "Sala de Reunião", Periodo.AMBOS)));
 
 		String resultado = agendaAction.filtrar();
 

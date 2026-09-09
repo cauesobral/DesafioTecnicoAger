@@ -3,6 +3,7 @@ package br.com.soc.sistema.action;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class FuncionarioActionTest {
 
 	@Test
 	void deveListarTodosOsFuncionarios() {
-		when(business.trazerTodosOsFuncionarios()).thenReturn(List.of(new FuncionarioVo("1", "João Silva")));
+		when(business.trazerTodosOsFuncionarios()).thenReturn(Arrays.asList(new FuncionarioVo("1", "João Silva")));
 
 		String resultado = funcionarioAction.todos();
 
@@ -49,7 +50,7 @@ class FuncionarioActionTest {
 		funcionarioAction.getFiltrar().setValorBusca("Silva");
 
 		when(business.filtrarFuncionarios(funcionarioAction.getFiltrar()))
-				.thenReturn(List.of(new FuncionarioVo("1", "João Silva")));
+				.thenReturn(Arrays.asList(new FuncionarioVo("1", "João Silva")));
 
 		String resultado = funcionarioAction.filtrar();
 

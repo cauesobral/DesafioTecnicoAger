@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,7 @@ class CompromissoActionTest {
 
 	@Test
 	void deveListarTodosOsCompromissos() {
-		when(business.trazerTodosOsCompromissos()).thenReturn(List.of(compromissoCompleto()));
+		when(business.trazerTodosOsCompromissos()).thenReturn(Arrays.asList(compromissoCompleto()));
 
 		String resultado = compromissoAction.todos();
 
@@ -128,7 +129,7 @@ class CompromissoActionTest {
 	@Test
 	void deveFiltrarCompromissos() {
 		when(business.filtrarCompromissos(compromissoAction.getFiltro()))
-				.thenReturn(List.of(compromissoCompleto()));
+				.thenReturn(Arrays.asList(compromissoCompleto()));
 
 		String resultado = compromissoAction.filtrar();
 
@@ -139,7 +140,7 @@ class CompromissoActionTest {
 	@Test
 	void deveRetornarListaDeFuncionariosParaOSelect() {
 		when(funcionarioBusiness.trazerTodosOsFuncionarios())
-				.thenReturn(List.of(new FuncionarioVo("1", "João Silva")));
+				.thenReturn(Arrays.asList(new FuncionarioVo("1", "João Silva")));
 
 		List<FuncionarioVo> lista = compromissoAction.getListaFuncionarios();
 
@@ -149,7 +150,7 @@ class CompromissoActionTest {
 	@Test
 	void deveRetornarListaDeAgendasParaOSelect() {
 		when(agendaBusiness.trazerTodasAsAgendas())
-				.thenReturn(List.of(new AgendaVo("2", "Consultório", Periodo.MANHA)));
+				.thenReturn(Arrays.asList(new AgendaVo("2", "Consultório", Periodo.MANHA)));
 
 		List<AgendaVo> lista = compromissoAction.getListaAgendas();
 
