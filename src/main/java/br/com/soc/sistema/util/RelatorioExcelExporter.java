@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -29,6 +30,8 @@ public class RelatorioExcelExporter {
 	private static final byte[] COR_DOURADO = {(byte) 0xFB, (byte) 0xBA, (byte) 0x00};
 	private static final byte[] COR_BRANCO = {(byte) 0xFF, (byte) 0xFF, (byte) 0xFF};
 	private static final byte[] COR_TURQUESA_CLARO = {(byte) 0xE0, (byte) 0xF5, (byte) 0xF5};
+
+	private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private static final String[] CABECALHO = {
 			"Código Compromisso", "Código Funcionário", "Nome Funcionário",
@@ -64,7 +67,7 @@ public class RelatorioExcelExporter {
 				preencherCelula(linha, 2, compromisso.getFuncionario().getNome(), estiloAtual);
 				preencherCelula(linha, 3, compromisso.getAgenda().getRowid(), estiloAtual);
 				preencherCelula(linha, 4, compromisso.getAgenda().getNome(), estiloAtual);
-				preencherCelula(linha, 5, compromisso.getDataCompromisso().toString(), estiloAtual);
+				preencherCelula(linha, 5, compromisso.getDataCompromisso().format(FORMATO_DATA), estiloAtual);
 				preencherCelula(linha, 6, compromisso.getHorarioCompromisso().toString(), estiloAtual);
 
 				numeroLinha++;
@@ -99,9 +102,7 @@ public class RelatorioExcelExporter {
 		Font fonte = workbook.createFont();
 		fonte.setBold(true);
 		fonte.setFontHeightInPoints((short) 11);
-		fonte.setColor(new XSSFColor(COR_BRANCO, null).getIndexed() != -1
-				? IndexedColors.WHITE.getIndex()
-				: IndexedColors.WHITE.getIndex());
+		fonte.setColor(IndexedColors.WHITE.getIndex());
 
 		XSSFCellStyle estilo = (XSSFCellStyle) workbook.createCellStyle();
 		estilo.setFont(fonte);

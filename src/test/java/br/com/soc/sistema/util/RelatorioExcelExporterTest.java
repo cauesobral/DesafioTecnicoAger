@@ -9,7 +9,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -78,7 +77,7 @@ class RelatorioExcelExporterTest {
 			assertEquals("João Silva", linha.getCell(2).getStringCellValue());
 			assertEquals("2", linha.getCell(3).getStringCellValue());
 			assertEquals("Consultório", linha.getCell(4).getStringCellValue());
-			assertEquals("2026-09-10", linha.getCell(5).getStringCellValue());
+			assertEquals("10/09/2026", linha.getCell(5).getStringCellValue());
 			assertEquals("08:30", linha.getCell(6).getStringCellValue());
 		}
 	}
@@ -99,11 +98,5 @@ class RelatorioExcelExporterTest {
 			assertEquals("João Silva", sheet.getRow(1).getCell(2).getStringCellValue());
 			assertEquals("Maria Santos", sheet.getRow(2).getCell(2).getStringCellValue());
 		}
-	}
-
-	private Cell getCell(Row row, int index) {
-		Cell cell = row.getCell(index);
-		assertNotNull(cell, "Célula " + index + " não deveria ser nula");
-		return cell;
 	}
 }
