@@ -5,11 +5,10 @@
 
 <struts>
 
-    <constant name="struts.devMode" value="true" />
-	<constant name="struts.ui.theme" value="simple" />
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
-	<constant name="struts.action.excludePattern" value="/webjars/.*,/h2-console/*" />
+<constant name="struts.devMode" value="false" />
+<constant name="struts.ui.theme" value="simple" />
+<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
 	
 <package name="br.com.soc.sistema" extends="struts-default" strict-method-invocation="false">
 	
