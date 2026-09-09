@@ -17,7 +17,7 @@
 		<div class="container">
 			<div class="row justify-content-center mt-5">
 				<div class="col-sm-8">
-					<div class="card card-erro">
+					<div class="card card-erro card-erro-tecnico">
 						<div class="card-header">
 							<h5 class="mb-0"><s:text name="label.erroTecnico.titulo"/></h5>
 						</div>

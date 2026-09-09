@@ -29,7 +29,14 @@
 							</div>
 
 							<div class="col-sm">
-								<h5 class="card-title">Novo Compromisso</h5>
+								<h5 class="card-title">
+									<s:if test="compromissoVo.rowid != null && compromissoVo.rowid != ''">
+										Editar Compromisso
+									</s:if>
+									<s:else>
+										Novo Compromisso
+									</s:else>
+								</h5>
 							</div>
 						</div>
 					</div>

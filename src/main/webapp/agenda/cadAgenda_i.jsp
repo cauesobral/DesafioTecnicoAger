@@ -28,7 +28,14 @@
 							</div>
 
 							<div class="col-sm">
-								<h5 class="card-title">Nova Agenda</h5>
+								<h5 class="card-title">
+									<s:if test="agendaVo.rowid != null && agendaVo.rowid != ''">
+										Editar Agenda
+									</s:if>
+									<s:else>
+										Nova Agenda
+									</s:else>
+								</h5>
 							</div>
 						</div>
 					</div>
