@@ -8,11 +8,14 @@ public class LocalTimeConverter extends StrutsTypeConverter {
 
 	@Override
 	public Object convertFromString(Map context, String[] values, Class toClass) {
+		if (values == null || values.length == 0 || values[0] == null || values[0].isEmpty()) {
+			return null;
+		}
 		return LocalTime.parse(values[0]);
 	}
 
 	@Override
 	public String convertToString(Map context, Object o) {
-		return o.toString();
+		return o == null ? null : o.toString();
 	}
 }
