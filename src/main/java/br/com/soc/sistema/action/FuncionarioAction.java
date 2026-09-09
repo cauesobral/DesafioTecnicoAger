@@ -57,11 +57,9 @@ public class FuncionarioAction extends Action {
 	}
 	
 	public String editar() {
-		if(funcionarioVo.getRowid() == null)
-			return REDIRECT;
-		
-		funcionarioVo = business.buscarFuncionarioPor(funcionarioVo.getRowid());
-		
+		if (funcionarioVo.getRowid() != null && !funcionarioVo.getRowid().isEmpty()) {
+			funcionarioVo = business.buscarFuncionarioPor(funcionarioVo.getRowid());
+		}
 		return INPUT;
 	}
 	
