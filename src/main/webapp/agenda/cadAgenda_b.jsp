@@ -125,8 +125,8 @@
 					<tbody>
 						<s:iterator value="agendas" >
 							<tr>
-								<td>${rowid}</td>
-								<td>${nome}</td>
+								<td><s:property value="rowid"/></td>
+								<td><s:property value="nome"/></td>
 								<td><s:text name="label.periodo.%{periodo}"/></td>
 								<td class="text-end">
 									<s:url action="editarAgendas" var="editar">

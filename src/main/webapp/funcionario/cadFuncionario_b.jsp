@@ -124,8 +124,8 @@
 					<tbody>
 						<s:iterator value="funcionarios" >
 							<tr>
-								<td>${rowid}</td>
-								<td>${nome}</td>
+								<td><s:property value="rowid"/></td>
+								<td><s:property value="nome"/></td>
 								<td class="text-end">
 									<s:url action="editarFuncionarios" var="editar">
 										<s:param name="funcionarioVo.rowid" value="rowid"></s:param>
